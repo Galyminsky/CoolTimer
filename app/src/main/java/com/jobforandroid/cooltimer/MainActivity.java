@@ -23,12 +23,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        seekBar = findViewById(R.id.seek_bar_taimer);
+        seekBar = findViewById(R.id.seek_bar_timer);
         time = findViewById(R.id.tvResult);
         btn_start = findViewById(R.id.btn_start);
 
         seekBar.setMax(500);
-        seekBar.setProgress(30);
+        seekBar.setProgress(50);
         isTimerOn = false;
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         time.setText("00:30");
         btn_start.setText("Start");
         seekBar.setEnabled(true);
-        seekBar.setProgress(30);
+        seekBar.setProgress(50);
         isTimerOn = false;
     }
 
