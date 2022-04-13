@@ -1,5 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">CoolTimer</string>
     <string name="_00_30">00:30</string>
     <string name="start">Start</string>
 </resources>

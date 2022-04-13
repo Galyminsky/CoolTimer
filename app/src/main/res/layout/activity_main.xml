@@ -13,16 +13,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:fontFamily="@font/aldrich"
-        android:text="05:00"
+        android:text="@string/_00_30"
         android:textColor="@color/black"
         android:textSize="50sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/seek_bar_taimer" />
+        app:layout_constraintTop_toBottomOf="@+id/seek_bar_timer" />
 
     <SeekBar
-        android:id="@+id/seek_bar_taimer"
+        android:id="@+id/seek_bar_timer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -37,7 +37,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:fontFamily="@font/aldrich"
-        android:text="Start"
+        android:onClick="start"
+        android:text="@string/start"
         android:textSize="16sp"
         app:cornerRadius="12dp"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
