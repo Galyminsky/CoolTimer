@@ -1,6 +1,7 @@
 package com.jobforandroid.cooltimer;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -71,16 +73,30 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onFinish() {
-                    MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.ring);
-                    mediaPlayer.start();
+                    SharedPreferences sharedPreferences =
+                            PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+                    if (sharedPreferences.getBoolean("enable_sound", true)) {
+
+                        String melodyName = sharedPreferences.getString("timer_melody", "bell");
+                        if (melodyName.equals("bell")) {
+                            MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.bell_sound);
+                            mediaPlayer.start();
+
+                        } else if (melodyName.equals("alarm_siren")) {
+                            MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.alarm_siren_sound);
+                            mediaPlayer.start();
+
+                        } else if (melodyName.equals("bip")) {
+                            MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.bip_sound);
+                            mediaPlayer.start();
+                        }
+                    }
                     resetTimer();
                 }
-            }.start();
-
-        } else {
-            resetTimer();
+            };
+            countDownTimer.start();
         }
-
     }
 
     private void updateTimer(long l) {

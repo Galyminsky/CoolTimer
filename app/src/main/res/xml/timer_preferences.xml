@@ -4,10 +4,19 @@
 
     <CheckBoxPreference
         android:defaultValue="true"
-        android:key="enable sound"
+        android:key="enable_sound"
         android:title="Enabled Sound"
         android:summaryOff="Sound Disable"
         android:summaryOn="Sound Enabled">
     </CheckBoxPreference>
+
+    <ListPreference
+        android:title="Timer Melody"
+        android:key="timer_melody"
+        android:defaultValue="bell"
+        android:entries="@array/pref_timer_melody_labels"
+        android:entryValues="@array/pref_timer_melody_values">
+
+    </ListPreference>
 
 </PreferenceScreen>
