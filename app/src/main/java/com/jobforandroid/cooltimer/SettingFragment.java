@@ -4,14 +4,17 @@ package com.jobforandroid.cooltimer;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
+import java.util.Objects;
 
-public class SettingFragment extends PreferenceFragmentCompat {
+
+public class SettingFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
 
 
     @Override
@@ -42,5 +45,26 @@ public class SettingFragment extends PreferenceFragmentCompat {
                 listPreference.setSummary(listPreference.getEntries()[index]);
             }
         }
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        Preference preference = findPreference(key);
+        if (!(preference instanceof CheckBoxPreference)) {
+            String value = sharedPreferences.getString(preference.getKey(), "");
+            setPreferenceLabel(preference, value);
+        }
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Objects.requireNonNull(getPreferenceScreen().getSharedPreferences()).registerOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Objects.requireNonNull(getPreferenceScreen().getSharedPreferences()).unregisterOnSharedPreferenceChangeListener(this);
     }
 }
