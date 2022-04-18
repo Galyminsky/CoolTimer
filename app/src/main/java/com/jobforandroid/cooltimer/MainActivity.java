@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -159,7 +160,14 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     }
 
     private void setIntervalFromSharedPreferences (SharedPreferences sharedPreferences) {
-        defaultInterval = Integer.parseInt(sharedPreferences.getString("default_interval", "30"));
+
+        try {
+            defaultInterval = Integer.parseInt(sharedPreferences.getString("default_interval", "30"));
+        } catch (NumberFormatException num) {
+            Toast.makeText(this, "Enter only Number!", Toast.LENGTH_LONG).show();
+        } catch (Exception all) {
+            Toast.makeText(this, "Enter only Number!", Toast.LENGTH_LONG).show();
+        }
         time.setText("00:" + defaultInterval);
         seekBar.setProgress(defaultInterval);
     }
