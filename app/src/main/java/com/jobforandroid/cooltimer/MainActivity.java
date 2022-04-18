@@ -16,9 +16,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 
-public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener, Preference.OnPreferenceChangeListener {
 
     private SeekBar seekBar;
     private TextView time;
@@ -159,15 +160,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         return super.onOptionsItemSelected(item);
     }
 
-    private void setIntervalFromSharedPreferences (SharedPreferences sharedPreferences) {
-
-        try {
-            defaultInterval = Integer.parseInt(sharedPreferences.getString("default_interval", "30"));
-        } catch (NumberFormatException num) {
-            Toast.makeText(this, "Enter only Number!", Toast.LENGTH_LONG).show();
-        } catch (Exception all) {
-            Toast.makeText(this, "Enter only Number!", Toast.LENGTH_LONG).show();
-        }
+    private void setIntervalFromSharedPreferences(SharedPreferences sharedPreferences) {
+        defaultInterval = Integer.parseInt(sharedPreferences.getString("default_interval", "30"));
         time.setText("00:" + defaultInterval);
         seekBar.setProgress(defaultInterval);
     }
@@ -183,5 +177,10 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     protected void onDestroy() {
         super.onDestroy();
         sharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
+        return false;
     }
 }
