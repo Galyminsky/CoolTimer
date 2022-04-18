@@ -19,4 +19,10 @@
 
     </ListPreference>
 
+    <EditTextPreference
+        android:title="Default Interval"
+        android:key="default_interval"
+        android:defaultValue="30">
+    </EditTextPreference>
+
 </PreferenceScreen>
